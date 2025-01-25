@@ -50,7 +50,7 @@ public class SlotController {
         return Mono.fromCallable(() -> {
             List<Slot> slots = (status == null)
                     ? slotRepository.findAll()
-                    : slotRepository.findByStatus(status);
+                    : (List<Slot>) slotRepository.findByStatus(status);
 
             List<EntityModel<Slot>> slotModels = slots.stream()
                     .map(slot -> EntityModel.of(slot, getLinks(slot)))

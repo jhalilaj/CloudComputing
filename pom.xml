@@ -37,10 +37,6 @@
       2) WebFlux Instead of MVC
          Provides the reactive web stack (RouterFunction, @RestController with Mono/Flux, etc.)
     -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webflux</artifactId>
-		</dependency>
 
 		<!-- 3) Spring Security (for JWT auth) -->
 		<dependency>

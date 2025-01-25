@@ -18,6 +18,11 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-loadbalancer</artifactId>
+			<version>4.1.2</version>
+		</dependency>
 		<!-- API Gateway -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>

@@ -9,7 +9,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
-
 @Entity
 public class Users {
     @Id
@@ -22,8 +21,8 @@ public class Users {
     @Column(nullable = false)
     private String password;
 
-    @OneToOne(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Slot slot;
+    @OneToOne(mappedBy = "user")
+    private Slot slot; // <-- must match the 'private Users user;' in Slot
 
     public Long getId() {
         return id;

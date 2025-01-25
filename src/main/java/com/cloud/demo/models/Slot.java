@@ -27,7 +27,7 @@ public class Slot {
 
     // MISSING RELATION BACK TO USER:
     @OneToOne
-    @JoinColumn(name = "user_id") // This column will appear in the 'Slot' table
+    @JoinColumn(name = "user_id")
     private Users user;
 
     // Getters and Setters

@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
-import com.cloud.demo.JwtAuthenticationFilter;
+import com.cloud.demo.JwtAuthenticationWebFilter;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final JwtAuthenticationFilter jwtAuthFilter;
+    private final JwtAuthenticationWebFilter jwtAuthFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {

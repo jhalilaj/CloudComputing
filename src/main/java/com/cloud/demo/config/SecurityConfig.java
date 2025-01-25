@@ -20,22 +20,24 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
 
-    // 1) Expose an AuthenticationManager bean:
     @Bean
-    public AuthenticationManager authenticationManagerBean(AuthenticationConfiguration config)
-            throws Exception {
+    public AuthenticationManager authenticationManagerBean(
+            AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 
-    // 2) Normal SecurityFilterChain for MVC:
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                // Disable CSRF for stateless JWT-based endpoints
                 .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(requests -> requests
+                .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
                         .anyRequest().authenticated())
+                // Register our custom JWT filter before the default
+                // UsernamePasswordAuthenticationFilter
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
 }

@@ -80,13 +80,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-hateoas</artifactId>
-			<exclusions>
-				<!-- This prevents it from pulling in spring-boot-starter-web -->
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-web</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<!-- Spring Cloud LoadBalancer (optional) -->
@@ -121,13 +114,7 @@
 			<scope>provided</scope>
 		</dependency>
 
-	
-   <dependency>
-     <groupId>com.google.android</groupId>
-     <artifactId>android</artifactId>
-     <version>4.1.1.4</version>
-   </dependency>
- </dependencies>
+	</dependencies>
 
 	<dependencyManagement>
 		<dependencies>

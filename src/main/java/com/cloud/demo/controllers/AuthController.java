@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.cloud.demo.models.User;
+import com.cloud.demo.models.Users;
 import com.cloud.demo.repositories.UserRepository;
 import com.cloud.demo.services.JwtService;
 
@@ -38,7 +37,7 @@ public class AuthController {
         );
 
         // If authentication is successful, load the User
-        User user = userRepository.findByUsername(request.username())
+        Users user = userRepository.findByUsername(request.username())
             .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         // Generate JWT

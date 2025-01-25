@@ -1,15 +1,11 @@
 package com.cloud.demo.repositories;
 
-import com.cloud.demo.models.Slot;
-
 import java.util.List;
-import com.cloud.demo.models.SlotStatus;
-
-import reactor.core.publisher.Flux;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import com.cloud.demo.models.Slot;
+import com.cloud.demo.models.SlotStatus;
 
 public interface SlotRepository extends JpaRepository<Slot, Long> {
-    Flux <Slot> findByStatus (SlotStatus status); 
-
+    List<Slot> findByStatus(SlotStatus status);
 }

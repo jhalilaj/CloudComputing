@@ -44,22 +44,11 @@ public class SlotController {
     }
 
     @GetMapping
-    public Mono<ResponseEntity<CollectionModel<EntityModel<Slot>>>> getAllSlots(
-            @RequestParam(required = false) SlotStatus status) {
-
-        return Mono.fromCallable(() -> {
-            List<Slot> slots = (status == null)
-                    ? slotRepository.findAll()
-                    : (List<Slot>) slotRepository.findByStatus(status);
-
-            List<EntityModel<Slot>> slotModels = slots.stream()
-                    .map(slot -> EntityModel.of(slot, getLinks(slot)))
-                    .collect(Collectors.toList());
-
-            return ResponseEntity.ok(
-                    CollectionModel.of(slotModels,
-                            linkTo(methodOn(SlotController.class).getAllSlots(status)).withSelfRel()));
-        });
+    public ResponseEntity<List<Slot>> getAllSlots(@RequestParam(required = false) SlotStatus status) {
+        List<Slot> slots = (status == null)
+                ? slotRepository.findAll()
+                : slotRepository.findByStatus(status);
+        return ResponseEntity.ok(slots);
     }
 
     @PutMapping("/{id}")

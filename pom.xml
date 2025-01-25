@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -24,19 +23,18 @@
 	</properties>
 
 	<dependencies>
-		<!-- 
-      1) Spring Cloud Gateway (requires Reactive/WebFlux)
-         The presence of this means we CANNOT use spring-boot-starter-web (MVC).
-    -->
+
+		<!-- 1) Spring Cloud Gateway (requires reactive / WebFlux) -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-gateway</artifactId>
 		</dependency>
 
-		<!-- 
-      2) WebFlux Instead of MVC
-         Provides the reactive web stack (RouterFunction, @RestController with Mono/Flux, etc.)
-    -->
+		<!-- 2) WebFlux Instead of MVC -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
 
 		<!-- 3) Spring Security (for JWT auth) -->
 		<dependency>
@@ -69,52 +67,64 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
-		<!-- Postgres driver (runtime scope) -->
+		<!-- Postgres driver -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- Spring HATEOAS (still works in WebFlux for generating links) -->
+		<!-- HATEOAS:
+         We exclude spring-boot-starter-web so it doesn't bring MVC onto the classpath.
+    -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-hateoas</artifactId>
+			<exclusions>
+				<!-- This prevents it from pulling in spring-boot-starter-web -->
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-web</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
-		<!-- Spring Cloud LoadBalancer (optional, as in your original POM) -->
+		<!-- Spring Cloud LoadBalancer (optional) -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-loadbalancer</artifactId>
 		</dependency>
 
-		<!-- Reactor Core (already included by WebFlux, but you can keep if you need a direct
-		version) -->
+		<!-- Reactor Core (already included by WebFlux, but if you want a direct version) -->
 		<dependency>
 			<groupId>io.projectreactor</groupId>
 			<artifactId>reactor-core</artifactId>
 		</dependency>
 
-		<!-- Jakarta Validation (used for @Valid) -->
+		<!-- Jakarta Validation (for @Valid) -->
 		<dependency>
 			<groupId>jakarta.validation</groupId>
 			<artifactId>jakarta.validation-api</artifactId>
 		</dependency>
 
-		<!-- Lombok (annotation processor) -->
+		<!-- Lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.26</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>6.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>
 		<dependencies>
-			<!-- 
-        Spring Cloud BOM aligned with Spring Boot 3.1.x, version 2022.0.x
-      -->
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>

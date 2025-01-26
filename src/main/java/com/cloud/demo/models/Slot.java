@@ -25,7 +25,7 @@ public class Slot {
     @Enumerated(EnumType.STRING)
     private SlotStatus status = SlotStatus.AVAILABLE;
 
-    // MISSING RELATION BACK TO USER:
+    
     @OneToOne
     @JoinColumn(name = "user_id")
     private Users user;

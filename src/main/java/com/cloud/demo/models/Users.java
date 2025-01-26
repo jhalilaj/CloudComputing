@@ -22,7 +22,7 @@ public class Users {
     private String password;
 
     @OneToOne(mappedBy = "user")
-    private Slot slot; // <-- must match the 'private Users user;' in Slot
+    private Slot slot; 
 
     public Long getId() {
         return id;
